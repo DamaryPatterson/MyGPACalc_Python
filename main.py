@@ -11,25 +11,25 @@ def main():
             gpa, total_grade_points, total_credits = calculate_cumulative_gpa(student_id)
             if gpa <= 2.0:
                 send_gpa_alert(student, gpa)
-                print(f"Alert sent for student {student_id} with GPA {gpa}")
-            print(f"Student ID: {student_id}, Total Grade Points: {total_grade_points}, Total Credits: {total_credits}, GPA: {gpa}")
+                print(f"Alert sent for student {student_id} with GPA {gpa:.3f}")
+            print(f"Student ID: {student_id}, Total Grade Points: {total_grade_points:.3f}, Total Credits: {total_credits:.3f}, GPA: {gpa:.3f}")
             
             # Calculate and display GPA for each semester
             for year in range(2024, 2025):  # Adjust the range as needed
                 for semester in range(1, 3):
                     semester_gpa, semester_total_grade_points, semester_total_credits = calculate_semester_gpa(student_id, year, semester)
-                    print(f"Year: {year}, Semester: {semester}, GPA: {semester_gpa}, Total Grade Points: {semester_total_grade_points}, Total Credits: {semester_total_credits}")
+                    print(f"Year: {year}, Semester: {semester}, GPA: {semester_gpa:.3f}, Total Grade Points: {semester_total_grade_points:.3f}, Total Credits: {semester_total_credits:.3f}")
     elif user_type == 'student':
         student_id = input("Enter your student ID: ")
         gpa, total_grade_points, total_credits = calculate_cumulative_gpa(student_id)
-        print(f"Your cumulative GPA is {gpa}")
-        print(f"Total Grade Points: {total_grade_points}, Total Credits: {total_credits}")
+        print(f"Your cumulative GPA is {gpa:.3f}")
+        print(f"Total Grade Points: {total_grade_points:.3f}, Total Credits: {total_credits:.3f}")
         
         # Calculate and display GPA for each semester
         for year in range(2024, 2025):  # Adjust the range as needed
             for semester in range(1, 3):
                 semester_gpa, semester_total_grade_points, semester_total_credits = calculate_semester_gpa(student_id, year, semester)
-                print(f"Year: {year}, Semester: {semester}, GPA: {semester_gpa}, Total Grade Points: {semester_total_grade_points}, Total Credits: {semester_total_credits}")
+                print(f"Year: {year}, Semester: {semester}, GPA: {semester_gpa:.3f}, Total Grade Points: {semester_total_grade_points:.3f}, Total Credits: {semester_total_credits:.3f}")
     else:
         print("Invalid user type")
 
