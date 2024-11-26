@@ -13,5 +13,5 @@ def send_email(to, subject, body):
 
 def send_gpa_alert(student, gpa):
     subject = "GPA Alert"
-    body = f"Dear {student[1]},\n\nYour current GPA is {gpa}. Please take necessary actions to improve it.\n\nBest regards,\nUniversity Administration"
+    body = f"Dear {student[1]},\n\nYour current GPA is {gpa:.3f}. Please take necessary actions to improve it.\n\nBest regards,\nUniversity Administration"
     send_email(student[2], subject, body)
