@@ -1,9 +1,10 @@
 from database import (
-    create_student, read_students, save_student_gpa, update_student, delete_student,
+    create_student, read_students, update_student, delete_student,
     create_module, read_modules, update_module, delete_module,
     create_module_detail, read_module_details, update_module_detail, delete_module_detail,
+    get_all_students, save_student_gpa
 )
-from gpa_calculator import calculate_cumulative_gpa
+from gpa_calculator import calculate_cumulative_gpa, update_default_gpa, get_default_gpa
 
 def admin_menu():
     while True:
@@ -21,7 +22,8 @@ def admin_menu():
         print("11. Update Module Detail")
         print("12. Delete Module Detail")
         print("13. Record Student GPA")
-        print("14. Exit")
+        print("14. Update Default GPA")
+        print("15. Exit")
         choice = input("Enter your choice: ")
 
         if choice == '1':
@@ -91,12 +93,21 @@ def admin_menu():
             if desired_gpa:
                 desired_gpa = float(desired_gpa)
             else:
-                desired_gpa = 2.0  # Default GPA
+                desired_gpa = get_default_gpa()  # Use default GPA
             gpa, total_grade_points, total_credits = calculate_cumulative_gpa(student_id)
             save_student_gpa(student_id, year, gpa)
-            print(f"Student ID: {student_id}, Year: {year}, Desired GPA: {desired_gpa}")
-            print(f"Total Grade Points: {total_grade_points:.3f}, Total Credits: {total_credits:.3f}, GPA: {gpa:.3f}")
+            print(f"University of Technology\nAcademic Probation Alert GPA Report\n")
+            print(f"Year: {year}\nGPA: {desired_gpa}")
+            print(f"Student ID: {student_id}, GPA Semester 1: {gpa:.3f}, GPA Semester 2: {gpa:.3f}, Cumulative GPA: {gpa:.3f}")
+            if gpa <= desired_gpa:
+                print("Status: On Academic Probation")
+            else:
+                print("Status: In Good Standing")
         elif choice == '14':
+            new_gpa = float(input("Enter new default GPA: "))
+            update_default_gpa(new_gpa)
+            print(f"Default GPA updated to {new_gpa:.3f}")
+        elif choice == '15':
             break
         else:
             print("Invalid choice. Please try again.")
